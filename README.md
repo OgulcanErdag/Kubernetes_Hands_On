@@ -94,30 +94,30 @@ eksctl create cluster \
 
 ### Beginner Level (S1-S6)
 
-| Module | Topic                                                                               | Description                               |
-| ------ | ----------------------------------------------------------------------------------- | ----------------------------------------- |
-| **S1** | [Kubernetes Installation](S1-kubernetes-01-installing-on-ec2-instance)              | Setting up Kubernetes cluster on EC2      |
-| **S2** | [Basic Operations](S2-kubernetes-02-basic-operations)                               | Pods, Deployments, ReplicaSets            |
-| **S3** | [Network & Service Discovery](S3-kubernetes-03-networking-service-discovery)        | Services, DNS, Networking                 |
-| **S4** | [Volumes](S4-kubernetes-04-pods-volumes)                                            | PersistentVolumes, PersistentVolumeClaims |
-| **S5** | [Configuration Management](S5-kubernetes-05-secrets-configmap)                      | ConfigMaps, Secrets                       |
-| **S6** | [Microservice Deployment](S6-kubernetes-06-microservice-deployment-and-autoscaling) | Todo App, Autoscaling                     |
+| Module | Topic                                                                            | Description                               |
+| ------ | -------------------------------------------------------------------------------- | ----------------------------------------- |
+| **S1** | [Kubernetes Installation](kubernetes-01-installing-on-ec2-instance)              | Setting up Kubernetes cluster on EC2      |
+| **S2** | [Basic Operations](kubernetes-02-basic-operations)                               | Pods, Deployments, ReplicaSets            |
+| **S3** | [Network & Service Discovery](kubernetes-03-networking-service-discovery)        | Services, DNS, Networking                 |
+| **S4** | [Volumes](kubernetes-04-pods-volumes)                                            | PersistentVolumes, PersistentVolumeClaims |
+| **S5** | [Configuration Management](kubernetes-05-secrets-configmap)                      | ConfigMaps, Secrets                       |
+| **S6** | [Microservice Deployment](kubernetes-06-microservice-deployment-and-autoscaling) | Todo App, Autoscaling                     |
 
 ### AWS & Cloud (S7-S8)
 
-| Module     | Topic                                                                          | Description                 |
-| ---------- | ------------------------------------------------------------------------------ | --------------------------- |
-| **S7**     | [AWS EKS Cluster Management](S7-eks-01-managing-kubernete-cluster-with-eks)    | EKS setup, node groups, IAM |
-| **S8**     | [Dynamic Volumes & Ingress](S8-eks-02-DynamicVolumeProvisionining-and-Ingress) | EBS, ALB Ingress Controller |
-| **EKS-03** | [ALB Ingress Advanced](eks-03-AWS-EKS-ALB-ingress)                             | Path-based routing, SSL/TLS |
+| Module     | Topic                                                                       | Description                 |
+| ---------- | --------------------------------------------------------------------------- | --------------------------- |
+| **S7**     | [AWS EKS Cluster Management](eks-01-managing-kubernete-cluster-with-eks)    | EKS setup, node groups, IAM |
+| **S8**     | [Dynamic Volumes & Ingress](eks-02-DynamicVolumeProvisionining-and-Ingress) | EBS, ALB Ingress Controller |
+| **EKS-03** | [ALB Ingress Advanced](eks-03-AWS-EKS-ALB-ingress)                          | Path-based routing, SSL/TLS |
 
 ### Advanced Level (S9-S11)
 
-| Module  | Topic                                                                    | Description                         |
-| ------- | ------------------------------------------------------------------------ | ----------------------------------- |
-| **S9**  | [Pod Scheduling](S9-kubernetes-12-pod-scheduling)                        | Node Selectors, Affinity, Taints    |
-| **S10** | [Health Checks](S10-kubernetes-09-Liveness-Readiness-and-Startup-Probes) | Liveness, Readiness, Startup Probes |
-| **S11** | [Helm Package Manager](S11-kubernetes-08-helm-basic-operations)          | Charts, Repositories, Releases      |
+| Module  | Topic                                                                | Description                         |
+| ------- | -------------------------------------------------------------------- | ----------------------------------- |
+| **S9**  | [Pod Scheduling](kubernetes-12-pod-scheduling)                       | Node Selectors, Affinity, Taints    |
+| **S10** | [Health Checks](kubernetes-09-Liveness-Readiness-and-Startup-Probes) | Liveness, Readiness, Startup Probes |
+| **S11** | [Helm Package Manager](kubernetes-08-helm-basic-operations)          | Charts, Repositories, Releases      |
 
 ### Specialist Topics
 
