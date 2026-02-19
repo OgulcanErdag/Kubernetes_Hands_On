@@ -40,43 +40,45 @@ At the end of this hands-on training, students will be able to;
 
 ### Control-plane (Master) Node(s)
 
-| Protocol | Direction | Port Range | Purpose                                    | Used By              |
-| -------- | --------- | ---------- | ------------------------------------------ | -------------------- | ---- |
-| TCP      | Inbound   | 6443       | Kubernetes API server                      | All                  |
-| TCP      | Inbound   | 2379-2380  | `etcd` server client API                   | kube-apiserver, etcd |
-| TCP      | Inbound   | 10250      | Kubelet API                                | Self, Control plane  | \*\* |
-| TCP      | Inbound   | 10259      | kube-scheduler                             | Self                 |
-| TCP      | Inbound   | 10257      | kube-controller-manager                    | Self                 |
-| TCP      | Inbound   | 22         | remote access with ssh                     | Self                 |
-| UDP      | Inbound   | 8472       | Cluster-Wide Network Comm. - Flannel VXLAN | Self                 |
+``
+|Protocol|Direction|Port Range|Purpose|Used By|
+|---|---|---|---|---|
+|TCP|Inbound|6443|Kubernetes API server|All|
+|TCP|Inbound|2379-2380|`etcd` server client API|kube-apiserver, etcd|
+|TCP|Inbound|10250|Kubelet API|Self, Control plane| \*\*
+|TCP|Inbound|10259|kube-scheduler|Self|
+|TCP|Inbound|10257|kube-controller-manager|Self|
+|TCP|Inbound|22|remote access with ssh|Self|
+|UDP|Inbound|8472|Cluster-Wide Network Comm. - Flannel VXLAN|Self|
 
 ### Worker Node(s)
 
-| Protocol | Direction | Port Range  | Purpose                                    | Used By              |
-| -------- | --------- | ----------- | ------------------------------------------ | -------------------- | ---- |
-| TCP      | Inbound   | 10250       | Kubelet API                                | Self, Control plane  |
-| TCP      | Inbound   | 10256       | kube-proxy                                 | Self, Load balancers | \*\* |
-| TCP      | Inbound   | 30000-32767 | NodePort Services                          | All                  |
-| TCP      | Inbound   | 22          | remote access with ssh                     | Self                 |
-| UDP      | Inbound   | 8472        | Cluster-Wide Network Comm. - Flannel VXLAN | Self                 |
+``
+|Protocol|Direction|Port Range|Purpose|Used By|
+|---|---|---|---|---|
+|TCP|Inbound|10250|Kubelet API|Self, Control plane|
+|TCP|Inbound|10256|kube-proxy|Self, Load balancers| \*\*
+|TCP|Inbound|30000-32767|NodePort Services|All|
+|TCP|Inbound|22|remote access with ssh|Self|
+|UDP|Inbound|8472|Cluster-Wide Network Comm. - Flannel VXLAN|Self|
 
 > **Ignore this section for AWS instances. But it must be applied to real servers/workstations.**
 >
 > - Find the line in `/etc/fstab` referring to swap, and comment it out as follows.
->
-> ```bash
-> # Swap a usb extern (3.7 GB):
-> #/dev/sdb1 none swap sw 0 0
-> ```
->
+
+```bash
+ # Swap a usb extern (3.7 GB):
+ #/dev/sdb1 none swap sw 0 0
+```
+
 > or,
 >
 > - Disable swap from the command line
->
-> ```bash
-> free -m
-> sudo swapoff -a && sudo sed -i '/ swap / s/^/#/' /etc/fstab
-> ```
+
+```bash
+free -m
+sudo swapoff -a && sudo sed -i '/ swap / s/^/#/' /etc/fstab
+```
 
 - Hostname change of the nodes, so we can discern the roles of each node. For example, you can name the nodes (instances) like `kube-master, kube-worker-1`
 
@@ -164,7 +166,7 @@ sudo systemctl status containerd
 
 - Test the containerd.
 
-```bah
+```bash
 sudo ctr images pull docker.io/library/redis:alpine
 sudo ctr run -d docker.io/library/redis:alpine redis
 sudo ctr container ls
@@ -178,7 +180,7 @@ sudo ctr container ls
 
 - Download `nerdctl-full-*-linux-amd64.tar.gz` release.
 
-```curl
+```bash
 wget https://github.com/containerd/nerdctl/releases/download/v2.0.3/nerdctl-full-2.0.3-linux-amd64.tar.gz
 ```
 
@@ -269,17 +271,17 @@ sudo kubeadm init --apiserver-advertise-address=172.31.80.28 --pod-network-cidr=
 
 > :warning: **Note**: If you are working on `t2.micro` or `t2.small` instances, use the command with `--ignore-preflight-errors=NumCPU` as shown below to ignore the errors.
 
-> ```bash
-> sudo kubeadm init --apiserver-advertise-address=172.31.88.58 --pod-network-cidr=10.244.0.0/16 --ignore-preflight-errors=NumCPU
-> ```
+```bash
+sudo kubeadm init --apiserver-advertise-address=172.31.88.58 --pod-network-cidr=10.244.0.0/16 --ignore-preflight-errors=NumCPU
+```
 
 > **Note**: There are a bunch of pod network providers, and some of them use a pre-defined `--pod-network-cidr` block. Check the documentation in the References section. We will use Flannel for the pod network, and Flannel uses the 10.244.0.0/16 CIDR block.
 
 > - In case of problems, use the following command to reset the initialization and restart from Part 2 (Setting Up Master Node for Kubernetes).
 
-> ```bash
-> sudo kubeadm reset
-> ```
+```bash
+sudo kubeadm reset
+```
 
 - After successful initialization, you should see something similar to the following output (shortened version).
 
@@ -431,7 +433,7 @@ kubectl get service -o wide
 
 - You will get an output like this.
 
-```text
+```bash
 kubernetes     ClusterIP   10.96.0.1       <none>        443/TCP        13m    <none>
 nginx-server   NodePort    10.110.144.60   <none>        80:32276/TCP   113s   run=nginx-server
 ```
