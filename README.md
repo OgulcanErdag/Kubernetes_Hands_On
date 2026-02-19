@@ -1,6 +1,6 @@
 # 🚀 Kubernetes Hands On & Practice Guide
 
-[Kubernetes](./kubernetes.png)
+![Kubernetes](./kubernetes.png)
 
 A comprehensive, hands-on training repository for learning Kubernetes from scratch to advanced level. Features real-world scenarios including AWS EKS, Terraform, Helm, and more.
 
