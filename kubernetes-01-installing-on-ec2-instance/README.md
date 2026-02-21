@@ -30,7 +30,7 @@ At the end of this hands-on training, students will be able to;
 
 ## Part 1 - Setting Up Kubernetes Environment on All Nodes
 
-- In this hands-on, we will prepare two nodes for Kubernetes on `Ubuntu 24.04`. One of the nodes will be configured as the Master node, the other will be the worker node. The following steps should be executed on all nodes. _Note: It is recommended to install Kubernetes on machines with `2 CPU Core` and `2GB RAM` at minimum to get it working efficiently. For this reason, we will select `t3.medium` as EC2 instance type, which has `2 CPU Core` and `4 GB RAM`._
+- In this hands-on, we will prepare two nodes for Kubernetes on `Ubuntu 24.04`. One of the nodes will be configured as the Master node, the other will be the worker node. The following steps should be executed on all nodes. _Note: It is recommended to install Kubernetes on machines with `2 CPU Core` and `2GB RAM` at minimum to get it working efficiently. For this reason, we will select `t2.medium` as EC2 instance type, which has `2 CPU Core` and `4 GB RAM`._
 
 - Explain briefly [required ports](https://kubernetes.io/docs/reference/networking/ports-and-protocols/) for Kubernetes.
 
@@ -269,7 +269,7 @@ sudo kubeadm config images pull
 sudo kubeadm init --apiserver-advertise-address=172.31.80.28 --pod-network-cidr=10.244.0.0/16
 ```
 
-> :warning: **Note**: If you are working on `t3.micro` or `t3.small` instances, use the command with `--ignore-preflight-errors=NumCPU` as shown below to ignore the errors.
+> :warning: **Note**: If you are working on `t2.micro` or `t2.small` instances, use the command with `--ignore-preflight-errors=NumCPU` as shown below to ignore the errors.
 
 ```bash
 sudo kubeadm init --apiserver-advertise-address=172.31.88.58 --pod-network-cidr=10.244.0.0/16 --ignore-preflight-errors=NumCPU
