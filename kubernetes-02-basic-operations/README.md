@@ -24,7 +24,7 @@ At the end of this hands-on training, students will be able to;
 
 ## Part 1 - Setting up the Kubernetes Cluster
 
-- Launch a Kubernetes Cluster of Ubuntu 22.04 with two nodes (one master, one worker) using the [Cloudformation Template to Create Kubernetes Cluster](./cfn-template-to-create-k8s-cluster.yml). _Note: Once the master node is up and running, the worker node automatically joins the cluster._
+- Launch a Kubernetes Cluster of Ubuntu 22.04 with two nodes (one master, one worker) using the [Cloudformation Template to Create Kubernetes Cluster](../create-kube-cluster-terraform/cfn-template-to-create-k8s-cluster.yml). _Note: Once the master node is up and running, the worker node automatically joins the cluster._
 
 > _Note: If you have a problem with the Kubernetes cluster, you can use this link for the lesson._
 > https://killercoda.com/playgrounds
@@ -100,7 +100,6 @@ spec:
 
 ```bash
 kubectl create -f mypod.yaml
-#kubectl apply -f mypod.yaml # if you have yaml file you can use apply
 ```
 
 - List the pods.
@@ -408,6 +407,67 @@ kubectl get deployment -o wide --all-namespaces
 kubectl delete namespaces mynamespace
 ```
 
+- You can also create the Namespace and the Deployment together in a single YAML file.
+
+- Create a YAML file named `namespace-and-deployment.yaml` with the following content.
+
+```YAML
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: mynamespace
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  namespace: mynamespace
+  labels:
+    environment: dev
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx
+          ports:
+            - containerPort: 80
+```
+
+- Apply the manifest.
+
+```bash
+kubectl apply -f namespace-and-deployment.yaml
+```
+
+- Verify the namespace and resources.
+
+```bash
+kubectl get ns
+kubectl get deploy -n mynamespace
+kubectl get rs -n mynamespace
+kubectl get pods -n mynamespace -o wide
+kubectl get deploy,rs,pod -n mynamespace -o wide
+# optional (shows everything in the namespace)
+kubectl get all -n mynamespace
+```
+
+- Delete (cleanup) the resources created with this manifest.
+
+```bash
+kubectl delete -f namespace-and-deployment.yaml
+# or delete manually
+kubectl delete deploy nginx-deployment -n mynamespace
+kubectl delete ns mynamespace
+```
+
 ## Part 4 - Deployment Rolling Update and Rollback in Kubernetes
 
 - Create a new folder, name it deployment-lesson.
@@ -574,6 +634,7 @@ kubectl get deploy,rs,po -l app=myapp
 
 ```bash
 kubectl rollout undo deploy mydeploy --to-revision=1
+# error: unable to find the specified revision
 ```
 
 - Show the rollout history and show that we have revisions 2, 3, and 4. Explain that the original revision, which is `revision 1`, becomes `revision 4`.
