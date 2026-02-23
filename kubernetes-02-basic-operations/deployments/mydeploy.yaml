@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mydeploy
+  labels:
+    app: myapp
+  annotations:
+    kubernetes.io/change-cause: deploy/mydeploy is set as mycontainer=ondiacademy/ondiaweb:3.0
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: myapp
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+        - name: mycontainer
+          image: ondiacademy/ondiaweb:3.0
+          ports:
+            - containerPort: 80
