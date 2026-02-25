@@ -20,7 +20,7 @@ At the end of the this hands-on training, students will be able to;
 
 ## Part 1 - Setting up the Kubernetes Cluster
 
-- Launch a Kubernetes Cluster of Ubuntu 22.04 with two nodes (one master, one worker) using the [Cloudformation Template to Create Kubernetes Cluster](../S2-kubernetes-02-basic-operations/cfn-template-to-create-k8s-cluster.yml). _Note: Once the master node is up and running, the worker node automatically joins the cluster._
+- Launch a Kubernetes Cluster of Ubuntu 22.04 with two nodes (one master, one worker) using the [Cloudformation Template to Create Kubernetes Cluster](../create-kube-cluster-terraform/kubernetes-02-basic-operations/cfn-template-to-create-k8s-cluster.yml). _Note: Once the master node is up and running, the worker node automatically joins the cluster._
 
 > _Note: If you have a problem with the Kubernetes cluster, you can use this link for the lesson._
 > https://killercoda.com/playgrounds
