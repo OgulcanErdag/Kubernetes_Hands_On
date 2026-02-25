@@ -1,0 +1,39 @@
+# --- Terraform ---
+.terraform/
+**/.terraform/*
+
+# Terraform state files (NEVER commit these)
+*.tfstate
+*.tfstate.*
+crash.log
+crash.*.log
+
+# Terraform plan outputs
+*.tfplan
+tfplan
+plan.out
+
+# Terraform CLI config files (user-specific)
+.terraformrc
+terraform.rc
+
+# Override files (used for local overrides, should not be committed)
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Variable files (often contain secrets, avoid committing)
+*.tfvars
+*.tfvars.json
+
+# Provider dependency lock file (usually SHOULD be committed)
+# terraform.lock.hcl
+
+
+# --- OS / Editor ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp

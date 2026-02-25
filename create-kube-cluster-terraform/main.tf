@@ -2,7 +2,7 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 5.0"
+      version = "~> 6.0"
     }
   }
 }
@@ -17,10 +17,10 @@ data "aws_region" "current" {}
 
 locals {
   # change here, optional
-  name         = "serag"
-  keyname      = "serag"
-  instancetype = "t3a.medium"
-  ami          = "ami-04b4f1a9cf54c11d0"
+  name         = "ogulcan"
+  keyname      = "ogi-us-key"
+  instancetype = "c7i-flex.large"
+  ami          = "ami-0b6c6ebed2801a5cb"
 }
 
 resource "aws_instance" "master" {
