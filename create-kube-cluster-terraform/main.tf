@@ -31,7 +31,7 @@ resource "aws_instance" "master" {
   user_data              = file("master.sh")
   vpc_security_group_ids = [aws_security_group.tf-k8s-master-sec-gr.id]
   tags = {
-    Name = "kube-master"
+    Name = "k8s-master"
   }
 }
 
@@ -43,7 +43,7 @@ resource "aws_instance" "worker" {
   vpc_security_group_ids = [aws_security_group.tf-k8s-master-sec-gr.id]
   user_data              = templatefile("worker.sh", { region = data.aws_region.current.name, master-id = aws_instance.master.id, master-zone = aws_instance.master.availability_zone, master-private = aws_instance.master.private_ip })
   tags = {
-    Name = "kube-worker"
+    Name = "k8s-worker"
   }
   root_block_device {
     volume_size = 20 # <-- Set to desired size in GB
@@ -101,7 +101,7 @@ resource "aws_iam_role_policy" "ec2connectcli_policy" {
 
 
 resource "aws_security_group" "tf-k8s-master-sec-gr" {
-  name = "${local.name}-k8s-master-sec-gr-serag"
+  name = "${local.name}-k8s-master-sec-gr-ogulcan"
   tags = {
     Name = "${local.name}-k8s-master-sec-gr"
   }
