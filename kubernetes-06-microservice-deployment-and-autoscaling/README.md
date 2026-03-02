@@ -162,6 +162,88 @@ spec:
 
 - Note that a database has no direct exposure to the outside world, so its type is `ClusterIP`.
 
+### Optional: Run MongoDB as a StatefulSet (Dynamic PVC per Pod)
+
+In real-world microservice architectures, databases are **stateful workloads**.  
+If we want to scale MongoDB to multiple replicas, using a **Deployment with a single PVC** is not a good fit, because each Pod would compete for the same volume (especially with `ReadWriteOnce` volumes).
+
+A **StatefulSet** is designed for stateful apps and provides:
+
+- Stable Pod names (e.g. `db-deployment-0`, `db-deployment-1`, ...)
+- Stable identity for each Pod
+- A separate PVC per Pod via `volumeClaimTemplates` (so every replica gets its own storage)
+
+> **Note:** This is an optional extension to understand stateful workloads. The main hands-on can still be completed using the Deployment approach.
+
+#### 1) Create a StatefulSet manifest (`db-sts.yaml`)
+
+Example:
+
+```yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: db-deployment
+  labels:
+    app: todoapp
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      name: mongo
+  template:
+    metadata:
+      labels:
+        name: mongo
+        app: todoapp
+    spec:
+      containers:
+        - name: mongo
+          image: mongo:5.0
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - name: mongo-storage
+              mountPath: /data/db
+  volumeClaimTemplates:
+    - metadata:
+        name: mongo-storage
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: local-path
+        resources:
+          requests:
+            storage: 1Gi
+```
+
+- This file will automatically create one PVC per Pod.
+
+```bash
+kubectl apply -f db-sts.yaml
+kubectl get sts,pods,pvc
+```
+
+You should see Pods like:
+
+- `db-deployment-0`
+- `db-deployment-1`
+- `db-deployment-2`
+- ...
+
+And PVCs like:
+
+- `mongo-storage-db-deployment-0`
+- `mongo-storage-db-deployment-1`
+- ...
+
+3. Why Deployment vs StatefulSet matters for DB scaling
+
+- Deployment: best for stateless apps (web/api). Scaling is easy.
+
+- StatefulSet: best for databases and stateful services. Each replica needs its own persistent storage and stable identity.
+
+---
+
 - Now, create the `web-deployment.yaml` for the web application.
 
 ```yaml
