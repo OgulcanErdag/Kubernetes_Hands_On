@@ -107,7 +107,7 @@ eksctl create cluster \
 
 | Module     | Topic                                                                       | Description                 |
 | ---------- | --------------------------------------------------------------------------- | --------------------------- |
-| **S7**     | [AWS EKS Cluster Management](eks-01-managing-kubernete-cluster-with-eks)    | EKS setup, node groups, IAM |
+| **S7**     | [AWS EKS Cluster Management](eks-01-managing-kubernetes-cluster-with-eks)   | EKS setup, node groups, IAM |
 | **S8**     | [Dynamic Volumes & Ingress](eks-02-DynamicVolumeProvisionining-and-Ingress) | EBS, ALB Ingress Controller |
 | **EKS-03** | [ALB Ingress Advanced](eks-03-AWS-EKS-ALB-ingress)                          | Path-based routing, SSL/TLS |
 
