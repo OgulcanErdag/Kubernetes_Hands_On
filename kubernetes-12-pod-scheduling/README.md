@@ -103,7 +103,9 @@ kubectl delete -f ogulcan-deploy.yaml
 - For this lesson, we need two worker nodes. Instead of creating an addition node, we will use the controlplane node as both the controlplane and worker node. So, we will arrange a controlplane with the following command.
 
 ```bash
+kubectl describe node kube-master | sed -n '/Taints:/,/^\S/p' # Purpose: To see the node's taints BEFORE running the taint command (baseline check).
 kubectl taint nodes kube-master node-role.kubernetes.io/control-plane:NoSchedule-
+kubectl describe node kube-master | sed -n '/Taints:/,/^\S/p'
 ```
 
 - Create the ogulcan-deploy again.
