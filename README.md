@@ -1,4 +1,4 @@
-![Kubernetes](./kubernetes.png)
+![Kubernetes](./kubernetes-banner.svg)
 
 # 🚀 Kubernetes Hands On & Practice Guide
 
@@ -54,8 +54,8 @@ To use these training materials, it's recommended to have the following tools in
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/kubernetes-training.git
-cd kubernetes-training
+git clone https://github.com/OgulcanErdag/Kubernetes_Hands_On.git
+cd Kubernetes_Hands_On
 ```
 
 ### 2. Kubernetes Cluster Setup
@@ -332,3 +332,9 @@ kubectl run test --image=busybox --rm -it -- wget -O- <service-name>
 - [CNCF Landscape](https://landscape.cncf.io/)
 
 **Happy Kubernetes Learning! 🚀**
+
+## 👨‍💻 Author
+
+**Ogulcan Erdag** | DevOps & Cloud Engineer  
+🌐 [ogulcan-erdag.com](https://ogulcan-erdag.com) |
+🐙 [GitHub](https://github.com/OgulcanErdag)
