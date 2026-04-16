@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myshop-v2
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: myshop
+      version: v2
+  template:
+    metadata:
+      labels:
+        app: myshop
+        version: v2
+    spec:
+      containers:
+        - name: myshop
+          image: clarusway/clarusshop:v2
+          ports:
+            - containerPort: 80
